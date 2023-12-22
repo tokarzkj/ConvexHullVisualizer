@@ -8,4 +8,4 @@ namespace ConvexHullVisualizer.Tests
 
         }
     }
-}q
+}
