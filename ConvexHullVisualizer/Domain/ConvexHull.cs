@@ -8,8 +8,8 @@
             if (points.Count() < 3) throw new ArgumentException($"{nameof(points)} requires at least 3 points");
 
             var sortedPoints = points.OrderBy(p => p.X);
-            var leftMostPoint = points.First();
-            var rightMostPoint = points.Last();
+            var leftMostPoint = sortedPoints.First();
+            var rightMostPoint = sortedPoints.Last();
 
             var leftPoints = new List<Point>();
             var rightPoints = new List<Point>();
