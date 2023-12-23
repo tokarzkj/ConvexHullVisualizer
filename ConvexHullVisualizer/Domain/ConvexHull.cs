@@ -4,7 +4,8 @@
     {
         public IEnumerable<Point> QuickHull(IEnumerable<Point> points)
         {
-            if (points is null || points.Count() < 3) throw new ArgumentException($"{nameof(points)} requires at least 3 points");
+            if (points is null) throw new ArgumentNullException(nameof(points));
+            if (points.Count() < 3) throw new ArgumentException($"{nameof(points)} requires at least 3 points");
 
             var sortedPoints = points.OrderBy(p => p.X);
             var leftMostPoint = points.First();
