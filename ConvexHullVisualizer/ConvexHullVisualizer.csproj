@@ -6,4 +6,24 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Components\ConvexHull.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Components\ConvexHull.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Components\ConvexHull.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Components\Pages\ConvexHull.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Plotly.Blazor" Version="4.1.0" />
+  </ItemGroup>
+
 </Project>

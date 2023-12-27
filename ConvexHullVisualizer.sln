@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConvexHullVisualizer", "ConvexHullVisualizer\ConvexHullVisualizer.csproj", "{32DC233F-E7CD-4DD7-B61B-17ECD3312B3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvexHullVisualizer.Tests", "ConvexHullVisualizer.Tests\ConvexHullVisualizer.Tests.csproj", "{12095FE7-1024-4EE1-AD5C-4587673EEFCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConvexHullVisualizer.Tests", "ConvexHullVisualizer.Tests\ConvexHullVisualizer.Tests.csproj", "{12095FE7-1024-4EE1-AD5C-4587673EEFCB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

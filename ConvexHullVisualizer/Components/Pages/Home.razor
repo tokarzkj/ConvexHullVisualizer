@@ -2,6 +2,13 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>The Convex Hull</h1>
 
-Welcome to your new app.
+<p>
+    The convex hull is the smallest shape that encloses all points in the data set. There are a multitude of methods
+    for programmatically solving the problem. This site uses the QuickHull method, which works using a divide and
+    conquer approach. The furthest left and right points are found then the points are divided as above and below that
+    line. The next iterations are forming a triangle by finding the furthest point above and below the line respectively.
+    Once that is complete, any point inside the triangle is not a hull candidate and can be discarded. This process is
+    repeated until the hull is assembled.
+</p>

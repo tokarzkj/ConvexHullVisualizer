@@ -1,0 +1,105 @@
+﻿@page "/convex-hull"
+@rendermode RenderMode.InteractiveServer
+@using ConvexHullVisualizer.Domain;
+@using System.Diagnostics
+
+<PageTitle> Convex Hull </PageTitle>
+<PlotlyChart @bind-Config="config" @bind-Layout="layout" @bind-Data="data" @ref="chart" />
+<br />
+<button @onclick="GenerateGraph">New Graph</button>
+
+@code {
+    PlotlyChart chart = new PlotlyChart();
+    Config config = new Config();
+    Layout layout = new Layout();
+    IList<ITrace> data = new List<ITrace>();
+
+    private IList<Point> Points = new List<Point>();
+
+    private void GeneratePoints()
+    {
+        var random = new Random();
+        Points = new List<Point>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            int x = random.Next(100);
+            int y = random.Next(100);
+
+            Points.Add(new Point(x, y));
+        }
+    }
+
+    private IEnumerable<Point> GetHull()
+    {
+        var convexHull = new Domain.ConvexHull();
+        return convexHull.QuickHull(Points);
+    }
+
+    private async void GenerateGraph()
+    {
+        GeneratePoints();
+        await chart.DeleteTrace(0);
+        await chart.DeleteTrace(0); // Since we deleted trace 0 in the previous line trace 1 is decremented to 0.
+
+        var scatter = new Scatter()
+            {
+                Name = "Data Points",
+                Mode = Plotly.Blazor.Traces.ScatterLib.ModeFlag.Markers,
+                X = Points.Select(p => p.X as object).ToList(),
+                Y = Points.Select(p => p.Y as object).ToList(),
+            };
+
+        await chart.AddTrace(scatter);
+
+        var hullPoints = GetHull();
+
+        var xPoints = hullPoints.Select(p => p.X as object).ToList();
+        xPoints.Add(hullPoints.First().X);
+
+        var yPoints = hullPoints.Select(p => p.Y as object).ToList();
+        yPoints.Add(hullPoints.First().Y);
+
+        var hullScatter = new Scatter()
+            {
+                Name = "Hull Points",
+                Mode = Plotly.Blazor.Traces.ScatterLib.ModeFlag.Lines,
+                X = xPoints,
+                Y = yPoints,
+            };
+
+        await chart.AddTrace(hullScatter);
+    }
+
+    protected override void OnInitialized()
+    {
+        GeneratePoints();
+        var scatter = new Scatter()
+            {
+                Name = "Data Points",
+                Mode = Plotly.Blazor.Traces.ScatterLib.ModeFlag.Markers,
+                X = Points.Select(p => p.X as object).ToList(),
+                Y = Points.Select(p => p.Y as object).ToList(),
+            };
+
+        data.Add(scatter);
+
+        var hullPoints = GetHull();
+
+        var xPoints = hullPoints.Select(p => p.X as object).ToList();
+        xPoints.Add(hullPoints.First().X);
+
+        var yPoints = hullPoints.Select(p => p.Y as object).ToList();
+        yPoints.Add(hullPoints.First().Y);
+
+        var hullScatter = new Scatter()
+            {
+                Name = "Hull Points",
+                Mode = Plotly.Blazor.Traces.ScatterLib.ModeFlag.Lines,
+                X = xPoints,
+                Y = yPoints,
+            };
+
+        data.Add(hullScatter);
+    }
+}
